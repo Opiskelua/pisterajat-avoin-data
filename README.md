@@ -14,6 +14,8 @@ Sarakkeiden kuvaukset: <https://opiskeluakatemia.fi/avoin-data>. Ajantasaisimmat
 - https://opiskeluakatemia.fi/avoin-data/yo-pisterajat.json
 - https://opiskeluakatemia.fi/avoin-data/korkeakoulujen-pisterajat.csv
 
+Sama aineisto Hugging Facessa: <https://huggingface.co/datasets/Opiskeluakatemia/pisterajat-avoin-data>
+
 CSV: erottimena pilkku, desimaalierottimena piste, merkistö UTF-8 (BOM).
 
 ```python
