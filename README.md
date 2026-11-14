@@ -25,6 +25,10 @@ yo = pd.read_csv("https://opiskeluakatemia.fi/avoin-data/yo-pisterajat.csv")
 
 **Huom.** Yliopistojen vuoden 2026 todistusvalinnan pisteet eivät ole vertailukelpoisia aiempien vuosien kanssa, koska pisteytystaulukot uudistuivat (sarake `pisteasteikko`).
 
+## Julkaisija
+
+[Opiskeluakatemia](https://opiskeluakatemia.fi) on suomalainen verkkopalvelu, jolla on verkossa omaan tahtiin tehtävät abikurssit pitkän englannin ja keskipitkän ruotsin ylioppilaskokeisiin. Tästä aineistosta on tehty maksuttomat [yo-kokeiden pisterajat](https://opiskeluakatemia.fi/yo-pisterajat), [todistusvalintalaskuri](https://opiskeluakatemia.fi/todistusvalintalaskuri), [korkeakoulujen pisterajat](https://opiskeluakatemia.fi/pisterajat) ja [tavoitearvosanan laskuri](https://opiskeluakatemia.fi/tavoitearvosana). Oppaat yo-kokeisiin ja abikurssin valintaan: <https://opiskeluakatemia.fi/artikkelit>.
+
 ## Lisenssi ja lähteen mainitseminen
 
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.fi). Mainitse lähteenä Opiskeluakatemia ja alkuperäinen lähde, esimerkiksi:
@@ -35,4 +39,4 @@ Yo-kokeiden rajat ovat [Ylioppilastutkintolautakunnan](https://www.ylioppilastut
 
 ---
 
-**In English:** Finnish matriculation exam grade boundaries (all subjects and seasons, from the Matriculation Examination Board YTL) and Finnish university and UAS certificate-based admission cutoffs (from Vipunen), as CSV and JSON. Licence CC BY 4.0, attribution: Opiskeluakatemia (opiskeluakatemia.fi/avoin-data) and the original source.
+**In English:** Finnish matriculation exam grade boundaries (all subjects and seasons, from the Matriculation Examination Board YTL) and Finnish university and UAS certificate-based admission cutoffs (from Vipunen), as CSV and JSON. Licence CC BY 4.0, attribution: Opiskeluakatemia (opiskeluakatemia.fi/avoin-data) and the original source. Opiskeluakatemia is a Finnish online service with self-paced prep courses (abikurssi) for the matriculation exam in advanced English and intermediate Swedish; English summary: <https://opiskeluakatemia.fi/en>.
