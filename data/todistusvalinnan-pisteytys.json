@@ -1,0 +1,5098 @@
+{
+  "title": "Todistusvalinnan pisteytys: yliopistot (2026 alkaen) ja ammattikorkeakoulut",
+  "description": "Kaikki, mitä todistusvalintalaskuri tarvitsee: ylioppilastutkinnon aineet, yliopistojen 11 pisteytystaulukkoa ja ammattikorkeakoulujen taulukko, alat kynnysehtoineen sekä laskentasäännöt. Pisteet ovat arvosanajärjestyksessä L, E, M, C, B, A; hylätty (I) on 0 pistettä.",
+  "descriptionEn": "Everything a Finnish certificate-based admission (todistusvalinta) points calculator needs: matriculation exam subjects, the 11 university scoring tables valid from 2026, the universities of applied sciences (AMK) table, fields of study with their minimum requirements (kynnysehto), and the scoring rules. Points arrays are in grade order L, E, M, C, B, A; a failed exam (I) scores 0.",
+  "publisher": "Opiskeluakatemia",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Data: Opiskeluakatemia (opiskeluakatemia.fi/avoin-data), CC BY 4.0",
+  "attributionHtml": "<a href=\"https://opiskeluakatemia.fi/avoin-data\">Data: Opiskeluakatemia</a> (CC BY 4.0)",
+  "checked": "2026-10-28",
+  "documentation": "https://opiskeluakatemia.fi/avoin-data/kehittajille",
+  "example": "https://opiskeluakatemia.fi/avoin-data/todistusvalinta-esimerkki.mjs",
+  "calculator": "https://opiskeluakatemia.fi/todistusvalintalaskuri",
+  "cutoffs": "https://opiskeluakatemia.fi/avoin-data/korkeakoulujen-pisterajat.json",
+  "sources": {
+    "universities": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026",
+    "amk": "https://www.ammattikorkeakouluun.fi/hakijalle/valintatavat/todistusvalinta/"
+  },
+  "disclaimer": "Epävirallinen kooste. Virallinen tieto on aina yliopistovalinnat.fi- ja ammattikorkeakouluun.fi-sivustoilla sekä Opintopolussa.",
+  "grades": [
+    "L",
+    "E",
+    "M",
+    "C",
+    "B",
+    "A"
+  ],
+  "levels": {
+    "native": "äidinkieli",
+    "long": "pitkä oppimäärä",
+    "medium": "keskipitkä oppimäärä",
+    "short": "lyhyt oppimäärä",
+    "real": "ainereaali"
+  },
+  "rules": [
+    "Pisteet lasketaan paikoittain (slots): jokaiseen paikkaan tulee enintään yksi koe ja jokainen koe enintään yhteen paikkaan. Valitaan se jako, joka tuottaa eniten pisteitä.",
+    "Sama aine tuottaa pisteitä vain kerran (subjects[].group): esimerkiksi pitkästä ja lyhyestä matematiikasta lasketaan parempi.",
+    "Paikka, jossa on rows, pisteyttää kokeen ensimmäisellä rivillä, jonka match-ehdot täyttyvät. Paikka, jossa on from: \"other\", pisteyttää kokeen taulukon other-riveillä; kind: \"real\" rajaa paikan ainereaaleihin (taulukko 10).",
+    "Yliopistojen taulukoissa äidinkielen paikkaan kelpaa vain paras äidinkielen koe (match.best). Jos äidinkielen kokeita on kaksi tai useampia, ne voi pisteyttää myös other-rivillä \"Pitkä kieli\". Muuten äidinkieli ei tuota pisteitä other-riveiltä.",
+    "Taulukossa 7 haettava kieli (fields[].targetLanguage) pisteytetään vain omassa paikassaan, ei other-riveillä. Jos alalla on targetLevels, vain ne oppimäärät kelpaavat haettavan kielen paikkaan.",
+    "Alan enimmäispisteet ovat taulukon maxPoints, ellei alalla ole omaa maxPoints-arvoa.",
+    "Kynnysehto (fields[].rule) on lista ryhmiä: jokaisen ryhmän pitää täyttyä, ja ryhmä täyttyy, kun yksikin sen ehdoista täyttyy (aine, mahdollinen oppimäärä ja vähimmäisarvosana). noThreshold: true = ei kynnysehtoa. Jos rule puuttuu eikä noThreshold ole tosi, ehto on tarkistettava threshold-tekstistä.",
+    "Rivi, jonka match-ehdossa on from, on voimassa vasta siitä päivästä alkaen (ammattikorkeakoulujen toinen kotimainen kieli 1.8.2027 alkaen)."
+  ],
+  "subjects": [
+    {
+      "id": "fi-native",
+      "name": "Äidinkieli, suomi",
+      "group": "fi",
+      "levels": [
+        "native"
+      ],
+      "kind": "native"
+    },
+    {
+      "id": "s2",
+      "name": "Suomi toisena kielenä (S2)",
+      "group": "fi",
+      "levels": [
+        "native"
+      ],
+      "kind": "native"
+    },
+    {
+      "id": "sv-native",
+      "name": "Äidinkieli, ruotsi",
+      "group": "sv",
+      "levels": [
+        "native"
+      ],
+      "kind": "native"
+    },
+    {
+      "id": "r2",
+      "name": "Ruotsi toisena kielenä (R2)",
+      "group": "sv",
+      "levels": [
+        "native"
+      ],
+      "kind": "native"
+    },
+    {
+      "id": "se-native",
+      "name": "Äidinkieli, pohjoissaame",
+      "group": "se",
+      "levels": [
+        "native"
+      ],
+      "kind": "native"
+    },
+    {
+      "id": "smn-native",
+      "name": "Äidinkieli, inarinsaame",
+      "group": "smn",
+      "levels": [
+        "native"
+      ],
+      "kind": "native"
+    },
+    {
+      "id": "sms-native",
+      "name": "Äidinkieli, koltansaame",
+      "group": "sms",
+      "levels": [
+        "native"
+      ],
+      "kind": "native"
+    },
+    {
+      "id": "math",
+      "name": "Matematiikka",
+      "group": "math",
+      "levels": [
+        "long",
+        "short"
+      ],
+      "kind": "math"
+    },
+    {
+      "id": "en",
+      "name": "Englanti",
+      "group": "en",
+      "levels": [
+        "long",
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "de",
+      "name": "Saksa",
+      "group": "de",
+      "levels": [
+        "long",
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "fr",
+      "name": "Ranska",
+      "group": "fr",
+      "levels": [
+        "long",
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "es",
+      "name": "Espanja",
+      "group": "es",
+      "levels": [
+        "long",
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "ru",
+      "name": "Venäjä",
+      "group": "ru",
+      "levels": [
+        "long",
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "sv",
+      "name": "Ruotsi, toinen kotimainen",
+      "group": "sv",
+      "levels": [
+        "long",
+        "medium"
+      ],
+      "kind": "language",
+      "domestic": true
+    },
+    {
+      "id": "fi",
+      "name": "Suomi, toinen kotimainen",
+      "group": "fi",
+      "levels": [
+        "long",
+        "medium"
+      ],
+      "kind": "language",
+      "domestic": true
+    },
+    {
+      "id": "it",
+      "name": "Italia",
+      "group": "it",
+      "levels": [
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "pt",
+      "name": "Portugali",
+      "group": "pt",
+      "levels": [
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "la",
+      "name": "Latina",
+      "group": "la",
+      "levels": [
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "se",
+      "name": "Pohjoissaame",
+      "group": "se",
+      "levels": [
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "smn",
+      "name": "Inarinsaame",
+      "group": "smn",
+      "levels": [
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "sms",
+      "name": "Koltansaame",
+      "group": "sms",
+      "levels": [
+        "short"
+      ],
+      "kind": "language"
+    },
+    {
+      "id": "biology",
+      "name": "Biologia",
+      "group": "biology",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "physics",
+      "name": "Fysiikka",
+      "group": "physics",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "chemistry",
+      "name": "Kemia",
+      "group": "chemistry",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "geography",
+      "name": "Maantiede",
+      "group": "geography",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "psychology",
+      "name": "Psykologia",
+      "group": "psychology",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "health",
+      "name": "Terveystieto",
+      "group": "health",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "history",
+      "name": "Historia",
+      "group": "history",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "social",
+      "name": "Yhteiskuntaoppi",
+      "group": "social",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "philosophy",
+      "name": "Filosofia",
+      "group": "philosophy",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "religion",
+      "name": "Uskonto",
+      "group": "religion",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    },
+    {
+      "id": "ethics",
+      "name": "Elämänkatsomustieto",
+      "group": "ethics",
+      "levels": [
+        "real"
+      ],
+      "kind": "real"
+    }
+  ],
+  "tables": [
+    {
+      "id": 1,
+      "name": "Kielet, kulttuurit, taiteiden tutkimus, oikeustieteet ja yhteiskuntatieteet",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/kielet-kulttuurit-taiteiden-tutkimus-oikeustiede-yhteiskuntatieteet",
+      "maxPoints": 149.9,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 3",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 4",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Matematiikka, pitkä",
+          "points": [
+            28.9,
+            28.6,
+            26,
+            20.2,
+            8.7,
+            4.3
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "long"
+          }
+        },
+        {
+          "label": "Matematiikka, lyhyt",
+          "points": [
+            28.2,
+            25.4,
+            22.5,
+            16.9,
+            8.4,
+            4.1
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "short"
+          }
+        },
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Matemaattiset tieteet, taloustiede ja tietojenkäsittelytieteet",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/matemaattiset-tieteet-taloustiede-tietojenkasittelytieteet",
+      "maxPoints": 158.9,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                37.9,
+                34.1,
+                30.3,
+                22.7,
+                11.4,
+                5.7
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                28.2,
+                22.5,
+                16.9,
+                11.2,
+                8.4,
+                4.1
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 3",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Kasvatustieteet, kauppatieteet ja logopedia",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/kasvatustieteet-kauppatieteet-logopedia",
+      "maxPoints": 149.9,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                28.9,
+                28.6,
+                26,
+                20.2,
+                8.7,
+                4.3
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                28.2,
+                25.4,
+                22.5,
+                16.9,
+                8.4,
+                4.1
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 3",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Liikuntapedagogiikka ja terveystieteet",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/liikuntapedagogiikka-terveystieteet",
+      "maxPoints": 155.6,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Terveystieto",
+          "rows": [
+            {
+              "label": "Terveystieto",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "subjects": [
+                  "health"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 3",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Matematiikka, pitkä",
+          "points": [
+            28.9,
+            28.6,
+            26,
+            20.2,
+            8.7,
+            4.3
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "long"
+          }
+        },
+        {
+          "label": "Matematiikka, lyhyt",
+          "points": [
+            28.2,
+            25.4,
+            22.5,
+            16.9,
+            8.4,
+            4.1
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "short"
+          }
+        },
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Maantiede",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/maantiede",
+      "maxPoints": 155.6,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Maantiede",
+          "rows": [
+            {
+              "label": "Maantiede",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "subjects": [
+                  "geography"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                28.9,
+                28.6,
+                26,
+                20.2,
+                8.7,
+                4.3
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                28.2,
+                25.4,
+                22.5,
+                16.9,
+                8.4,
+                4.1
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Psykologia",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/psykologia",
+      "maxPoints": 155.6,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Psykologia",
+          "rows": [
+            {
+              "label": "Psykologia",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "subjects": [
+                  "psychology"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                28.9,
+                28.6,
+                26,
+                20.2,
+                8.7,
+                4.3
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                28.2,
+                25.4,
+                22.5,
+                16.9,
+                8.4,
+                4.1
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Vieraat kielet",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/vieraat-kielet",
+      "maxPoints": 155.6,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Haettava kieli",
+          "rows": [
+            {
+              "label": "Kieli, johon haet, pitkä",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "targetLanguage": true,
+                "level": "long"
+              }
+            },
+            {
+              "label": "Kieli, johon haet, lyhyt",
+              "points": [
+                29.9,
+                26.9,
+                23.9,
+                17.9,
+                9,
+                4.5
+              ],
+              "match": {
+                "targetLanguage": true,
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 3",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Matematiikka, pitkä",
+          "points": [
+            28.9,
+            28.6,
+            26,
+            20.2,
+            8.7,
+            4.3
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "long"
+          }
+        },
+        {
+          "label": "Matematiikka, lyhyt",
+          "points": [
+            28.2,
+            25.4,
+            22.5,
+            16.9,
+            8.4,
+            4.1
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "short"
+          }
+        },
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Biotieteet, farmasia, geotieteet, elintarviketieteet, maatalous- ja metsätieteet",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/biotieteet-farmasia-geotieteet-elintarviketieteet-maatalous-ja-metsatieteet",
+      "maxPoints": 164.6,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                37.9,
+                34.1,
+                30.3,
+                22.7,
+                11.4,
+                5.7
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                28.2,
+                22.5,
+                16.9,
+                11.2,
+                8.4,
+                4.1
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Biologia, kemia tai fysiikka",
+          "rows": [
+            {
+              "label": "Biologia, kemia tai fysiikka *",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "subjects": [
+                  "biology",
+                  "chemistry",
+                  "physics"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Filosofia, historia ja teologia",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/filosofia-historia-teologia",
+      "maxPoints": 155.6,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Filosofia tai historia tai uskonto tai elämänkatsomustieto",
+          "rows": [
+            {
+              "label": "Filosofia tai historia tai uskonto tai elämänkatsomustieto *",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "subjects": [
+                  "philosophy",
+                  "history",
+                  "religion",
+                  "ethics"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 3",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Matematiikka, pitkä",
+          "points": [
+            28.9,
+            28.6,
+            26,
+            20.2,
+            8.7,
+            4.3
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "long"
+          }
+        },
+        {
+          "label": "Matematiikka, lyhyt",
+          "points": [
+            28.2,
+            25.4,
+            22.5,
+            16.9,
+            8.4,
+            4.1
+          ],
+          "match": {
+            "subjects": [
+              "math"
+            ],
+            "level": "short"
+          }
+        },
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Biolääketiede, lääketieteelliset alat ja ravitsemustiede",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/biolaaketiede-laaketieteelliset-alat-ravitsemustiede",
+      "maxPoints": 193.1,
+      "countedSubjects": 6,
+      "slots": [
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                37.9,
+                34.1,
+                30.3,
+                22.7,
+                11.4,
+                5.7
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                28.2,
+                22.5,
+                16.9,
+                11.2,
+                8.4,
+                4.1
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Biologia",
+          "rows": [
+            {
+              "label": "Biologia",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "subjects": [
+                  "biology"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Kemia",
+          "rows": [
+            {
+              "label": "Kemia",
+              "points": [
+                32.3,
+                29.1,
+                25.8,
+                19.4,
+                9.7,
+                4.8
+              ],
+              "match": {
+                "subjects": [
+                  "chemistry"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine (ainereaali)",
+          "from": "other",
+          "kind": "real"
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Fysiikka, kemia, matemaattisten alojen opettajankoulutukset ja tekniikka",
+      "source": "https://yliopistovalinnat.fi/todistusvalinnan-pisteytykset-vuodesta-2026/fysiikka-kemia-matemaattisten-alojen-opettajankoulutukset-tekniikka",
+      "maxPoints": 172.1,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                39.7,
+                35.7,
+                31.8,
+                25.1,
+                11.9,
+                6
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                28.2,
+                22.5,
+                16.9,
+                11.2,
+                8.4,
+                4.1
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Äidinkieli ja kirjallisuus",
+          "rows": [
+            {
+              "label": "Äidinkieli ja kirjallisuus",
+              "points": [
+                36.1,
+                32.5,
+                28.8,
+                21.7,
+                10.8,
+                5.4
+              ],
+              "match": {
+                "kind": "native",
+                "best": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Fysiikka tai kemia",
+          "rows": [
+            {
+              "label": "Fysiikka tai kemia",
+              "points": [
+                34,
+                30.6,
+                27.2,
+                20.4,
+                10.2,
+                5.1
+              ],
+              "match": {
+                "subjects": [
+                  "physics",
+                  "chemistry"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Muu aine 1",
+          "from": "other"
+        },
+        {
+          "label": "Muu aine 2",
+          "from": "other"
+        }
+      ],
+      "other": [
+        {
+          "label": "Pitkä kieli",
+          "points": [
+            28.3,
+            25.5,
+            22.6,
+            17,
+            8.5,
+            4.2
+          ],
+          "match": {
+            "kind": "language",
+            "level": "long"
+          }
+        },
+        {
+          "label": "Keskipitkä kieli",
+          "points": [
+            25,
+            20,
+            15,
+            10,
+            7.5,
+            3.8
+          ],
+          "match": {
+            "kind": "language",
+            "level": "medium"
+          }
+        },
+        {
+          "label": "Lyhyt kieli (muu kuin englanti)",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "kind": "language",
+            "level": "short",
+            "exceptSubjects": [
+              "en"
+            ]
+          }
+        },
+        {
+          "label": "Fysiikka",
+          "points": [
+            34,
+            30.6,
+            27.2,
+            20.4,
+            10.2,
+            5.1
+          ],
+          "match": {
+            "subjects": [
+              "physics"
+            ]
+          }
+        },
+        {
+          "label": "Kemia",
+          "points": [
+            34,
+            30.6,
+            27.2,
+            20.4,
+            10.2,
+            5.1
+          ],
+          "match": {
+            "subjects": [
+              "chemistry"
+            ]
+          }
+        },
+        {
+          "label": "Biologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "biology"
+            ]
+          }
+        },
+        {
+          "label": "Psykologia",
+          "points": [
+            24.5,
+            19.6,
+            14.7,
+            9.8,
+            7.4,
+            3.7
+          ],
+          "match": {
+            "subjects": [
+              "psychology"
+            ]
+          }
+        },
+        {
+          "label": "Elämänkatsomustieto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "ethics"
+            ]
+          }
+        },
+        {
+          "label": "Filosofia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "philosophy"
+            ]
+          }
+        },
+        {
+          "label": "Historia",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "history"
+            ]
+          }
+        },
+        {
+          "label": "Maantiede",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "geography"
+            ]
+          }
+        },
+        {
+          "label": "Terveystieto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "health"
+            ]
+          }
+        },
+        {
+          "label": "Uskonto",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "religion"
+            ]
+          }
+        },
+        {
+          "label": "Yhteiskuntaoppi",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "social"
+            ]
+          }
+        },
+        {
+          "label": "Lyhyt englanti",
+          "points": [
+            20,
+            16,
+            12,
+            8,
+            6,
+            3
+          ],
+          "match": {
+            "subjects": [
+              "en"
+            ],
+            "level": "short"
+          }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Ammattikorkeakoulut",
+      "source": "https://www.ammattikorkeakouluun.fi/hakijalle/valintatavat/todistusvalinta/",
+      "maxPoints": 198,
+      "countedSubjects": 5,
+      "slots": [
+        {
+          "label": "Äidinkieli",
+          "rows": [
+            {
+              "label": "Äidinkieli",
+              "points": [
+                46,
+                41,
+                34,
+                26,
+                18,
+                10
+              ],
+              "match": {
+                "kind": "native"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Matematiikka",
+          "rows": [
+            {
+              "label": "Matematiikka, pitkä",
+              "points": [
+                46,
+                43,
+                40,
+                35,
+                27,
+                19
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "long"
+              }
+            },
+            {
+              "label": "Matematiikka, lyhyt",
+              "points": [
+                40,
+                35,
+                27,
+                19,
+                13,
+                6
+              ],
+              "match": {
+                "subjects": [
+                  "math"
+                ],
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vieras / toinen kotimainen kieli",
+          "rows": [
+            {
+              "label": "Pitkä kieli",
+              "points": [
+                46,
+                41,
+                34,
+                26,
+                18,
+                10
+              ],
+              "match": {
+                "kind": "language",
+                "level": "long"
+              }
+            },
+            {
+              "label": "Keskipitkä kieli",
+              "points": [
+                38,
+                34,
+                26,
+                18,
+                12,
+                5
+              ],
+              "match": {
+                "kind": "language",
+                "level": "medium"
+              }
+            },
+            {
+              "label": "Lyhyt kieli",
+              "points": [
+                30,
+                27,
+                21,
+                15,
+                9,
+                3
+              ],
+              "match": {
+                "kind": "language",
+                "level": "short"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Ainereaali tai vieras kieli 1",
+          "rows": [
+            {
+              "label": "Ainereaali",
+              "points": [
+                30,
+                27,
+                21,
+                15,
+                9,
+                3
+              ],
+              "match": {
+                "kind": "real"
+              }
+            },
+            {
+              "label": "Vieras kieli",
+              "points": [
+                30,
+                27,
+                21,
+                15,
+                9,
+                3
+              ],
+              "match": {
+                "kind": "language",
+                "domestic": false
+              }
+            },
+            {
+              "label": "Toinen kotimainen kieli (syksyn 2027 yhteishausta alkaen)",
+              "points": [
+                30,
+                27,
+                21,
+                15,
+                9,
+                3
+              ],
+              "match": {
+                "kind": "language",
+                "domestic": true,
+                "from": "2027-08-01"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Ainereaali tai vieras kieli 2",
+          "rows": [
+            {
+              "label": "Ainereaali",
+              "points": [
+                30,
+                27,
+                21,
+                15,
+                9,
+                3
+              ],
+              "match": {
+                "kind": "real"
+              }
+            },
+            {
+              "label": "Vieras kieli",
+              "points": [
+                30,
+                27,
+                21,
+                15,
+                9,
+                3
+              ],
+              "match": {
+                "kind": "language",
+                "domestic": false
+              }
+            },
+            {
+              "label": "Toinen kotimainen kieli (syksyn 2027 yhteishausta alkaen)",
+              "points": [
+                30,
+                27,
+                21,
+                15,
+                9,
+                3
+              ],
+              "match": {
+                "kind": "language",
+                "domestic": true,
+                "from": "2027-08-01"
+              }
+            }
+          ]
+        }
+      ],
+      "other": [],
+      "note": "Syksyn 2027 yhteishausta alkaen (1.8.2027) toinen kotimainen kieli voidaan pisteyttää myös kohdassa ”ainereaali tai vieras kieli”."
+    }
+  ],
+  "fields": [
+    {
+      "id": "bachelors-programme-in-science",
+      "name": "Bachelor’s Programme in Science",
+      "table": 2,
+      "threshold": "Pitkä matematiikka vähintään C tai lyhyt matematiikka vähintään M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "biokemia-ja-molekyylibiotieteet",
+      "name": "Biokemia ja molekyylibiotieteet",
+      "table": 8,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "biologia-ja-ymparistotieteet",
+      "name": "Biologia ja ympäristötieteet",
+      "table": 8,
+      "threshold": "Biologia suoritettu hyväksytysti.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "biology"
+            ],
+            "min": "A"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "biolaaketiede",
+      "name": "Biolääketiede",
+      "table": 10,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "elintarviketieteet",
+      "name": "Elintarviketieteet",
+      "table": 8,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "elainlaaketiede",
+      "name": "Eläinlääketiede",
+      "table": 10,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "kieli-en",
+      "name": "Englanti (vieras kieli)",
+      "table": 7,
+      "threshold": "Pitkä englanti vähintään E. Åbo Akademin Engelska språket och litteraturen -hakukohteessa ei ole kynnysehtoa.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "en"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "E"
+          }
+        ]
+      ],
+      "targetLanguage": "en",
+      "targetLevels": [
+        "long"
+      ]
+    },
+    {
+      "id": "kieli-es",
+      "name": "Espanja (vieras kieli)",
+      "table": 7,
+      "threshold": "Pitkä espanja vähintään C tai lyhyt espanja vähintään M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "es"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "es"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ],
+      "targetLanguage": "es"
+    },
+    {
+      "id": "farmasia",
+      "name": "Farmasia",
+      "table": 8,
+      "threshold": "Kemia ja matematiikka (pitkä tai lyhyt) suoritettu hyväksytysti. Åbo Akademin Farmaci- ja Farmaci och provisor -hakukohteissa ei ole kynnysehtoja.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "chemistry"
+            ],
+            "min": "A"
+          }
+        ],
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "min": "A"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "filosofia",
+      "name": "Filosofia",
+      "table": 9,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "opettajankoulutus-matemaattiset",
+      "name": "Fysiikan, kemian, matematiikan ja tietojenkäsittelytieteen opettajankoulutukset",
+      "table": 11,
+      "threshold": "Pitkä matematiikka vähintään C tai lyhyt matematiikka vähintään E.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "E"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "fysiikka",
+      "name": "Fysiikka",
+      "table": 11,
+      "threshold": "Pitkä matematiikka vähintään C tai lyhyt matematiikka vähintään E. Åbo Akademin Matematik och fysik -hakukohteessa ei ole kynnysehtoa.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "E"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "geotieteet",
+      "name": "Geotieteet",
+      "table": 8,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "hammaslaaketiede",
+      "name": "Hammaslääketiede",
+      "table": 10,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "historia",
+      "name": "Historia",
+      "table": 9,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "inarinsaame-koltansaame",
+      "name": "Inarinsaame ja koltansaame",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "informaatioverkostot",
+      "name": "Informaatioverkostot",
+      "table": 2,
+      "threshold": "Pitkä matematiikka suoritettu hyväksytysti.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "A"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "kieli-it",
+      "name": "Italia (vieras kieli)",
+      "table": 7,
+      "threshold": "Lyhyt italia vähintään M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "it"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ],
+      "targetLanguage": "it",
+      "maxPoints": 151.5
+    },
+    {
+      "id": "kasvatustieteet",
+      "name": "Kasvatustieteet",
+      "table": 3,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "kauppatieteet",
+      "name": "Kauppatieteet",
+      "table": 3,
+      "threshold": "Matematiikka (pitkä tai lyhyt) suoritettu hyväksytysti.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "min": "A"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "kemia",
+      "name": "Kemia",
+      "table": 11,
+      "threshold": "Pitkä matematiikka vähintään B tai lyhyt matematiikka vähintään M. Åbo Akademin Kemi-hakukohteessa ei ole kynnysehtoa.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "B"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "kirjallisuustieteet",
+      "name": "Kirjallisuustieteet",
+      "table": 1,
+      "threshold": "Äidinkieli ja kirjallisuus vähintään M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "fi-native",
+              "s2",
+              "sv-native",
+              "r2",
+              "se-native",
+              "smn-native",
+              "sms-native"
+            ],
+            "min": "M"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "kotimaiset-kielet",
+      "name": "Kotimaiset kielet (suomi, ruotsi)",
+      "table": 1,
+      "threshold": "Suomen ja ruotsin hakukohteissa on kielikohtaiset kynnysehdot, jotka riippuvat siitä, opiskellaanko kieltä äidinkielen vai toisen kotimaisen kielen tasolla. Osassa Helsingin yliopiston hakukohteista ehdon voi täyttää vain tietyllä kokeella, ja Åbo Akademin finska språket -hakukohteessa kynnysehtoja ei ole. Tarkista oman hakukohteesi ehto lähdesivulta."
+    },
+    {
+      "id": "kulttuurien-tutkimus",
+      "name": "Kulttuurien tutkimus",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "liberal-arts-and-sciences",
+      "name": "Liberal Arts and Sciences",
+      "table": 2,
+      "threshold": "Äidinkieli ja kirjallisuus arvosana C ja pitkä matematiikka arvosanalla C tai lyhyt matematiikka arvosanalla M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "fi-native",
+              "s2",
+              "sv-native",
+              "r2",
+              "se-native",
+              "smn-native",
+              "sms-native"
+            ],
+            "min": "C"
+          }
+        ],
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "liikunnan-yhteiskuntatieteet",
+      "name": "Liikunnan yhteiskuntatieteet",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "liikuntabiologia",
+      "name": "Liikuntabiologia",
+      "table": 8,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "liikuntapedagogiikka",
+      "name": "Liikuntapedagogiikka",
+      "table": 4,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "logopedia",
+      "name": "Logopedia",
+      "table": 3,
+      "threshold": "Äidinkieli ja kirjallisuus vähintään M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "fi-native",
+              "s2",
+              "sv-native",
+              "r2",
+              "se-native",
+              "smn-native",
+              "sms-native"
+            ],
+            "min": "M"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "laaketiede",
+      "name": "Lääketiede",
+      "table": 10,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "maantiede",
+      "name": "Maantiede",
+      "table": 5,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "maataloustieteet",
+      "name": "Maataloustieteet",
+      "table": 8,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "matematiikka",
+      "name": "Matematiikka, tilastotiede ja datatiede",
+      "table": 2,
+      "threshold": "Pitkä matematiikka vähintään C tai lyhyt matematiikka vähintään E.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "E"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "metsatieteet",
+      "name": "Metsätieteet",
+      "table": 8,
+      "threshold": "Pitkä matematiikka suoritettu hyväksytysti tai lyhyt matematiikka vähintään C. Helsingin yliopiston metsätieteiden kandiohjelmassa ei ole kynnysehtoa.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "A"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "C"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "nanotiede",
+      "name": "Nanotiede",
+      "table": 8,
+      "threshold": "Pitkä matematiikka vähintään B tai lyhyt matematiikka vähintään M sekä fysiikka tai kemia tai biologia vähintään C.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "B"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ],
+        [
+          {
+            "subjects": [
+              "physics",
+              "chemistry",
+              "biology"
+            ],
+            "min": "C"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "oikeustieteet",
+      "name": "Oikeustieteet",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "pohjoissaame",
+      "name": "Pohjoissaame",
+      "table": 1,
+      "threshold": "Pohjoissaamen äidinkielen ja kirjallisuuden koe vähintään C tai pohjoissaame lyhyenä kielenä vähintään E.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "se-native"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "se"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "E"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "psykologia",
+      "name": "Psykologia",
+      "table": 6,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "kieli-fr",
+      "name": "Ranska (vieras kieli)",
+      "table": 7,
+      "threshold": "Pitkä ranska vähintään C tai lyhyt ranska vähintään M. Åbo Akademin Franska språket och litteraturen -hakukohteessa ei ole kynnysehtoa.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "fr"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "fr"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ],
+      "targetLanguage": "fr"
+    },
+    {
+      "id": "ravitsemustiede",
+      "name": "Ravitsemustiede",
+      "table": 10,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "kieli-de",
+      "name": "Saksa (vieras kieli)",
+      "table": 7,
+      "threshold": "Pitkä saksa vähintään C tai lyhyt saksa vähintään M. Åbo Akademin Tyska språket och litteraturen -hakukohteessa ei ole kynnysehtoa.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "de"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "de"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ],
+      "targetLanguage": "de"
+    },
+    {
+      "id": "taiteiden-tutkimus",
+      "name": "Taiteiden tutkimus",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "taloustiede",
+      "name": "Taloustiede",
+      "table": 2,
+      "threshold": "Pitkä matematiikka suoritettu hyväksytysti tai lyhyt matematiikka vähintään C. Helsingin yliopiston elintarviketalouden ja kulutuksen sekä ympäristön ja maatalouden taloustieteen kandiohjelmissa ei ole kynnysehtoa.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "A"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "C"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "tekniikka",
+      "name": "Tekniikan ala (DI)",
+      "table": 11,
+      "threshold": "Pitkä matematiikka sekä fysiikka tai kemia suoritettu hyväksytysti. Yhden näistä aineista tulee olla vähintään C.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "A"
+          }
+        ],
+        [
+          {
+            "subjects": [
+              "physics",
+              "chemistry"
+            ],
+            "min": "A"
+          }
+        ],
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "physics",
+              "chemistry"
+            ],
+            "min": "C"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "teologia",
+      "name": "Teologia",
+      "table": 9,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "terveystieteet",
+      "name": "Terveystieteet",
+      "table": 4,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "tietojenkasittelytieteet",
+      "name": "Tietojenkäsittelytieteet",
+      "table": 2,
+      "threshold": "Pitkä matematiikka vähintään C tai lyhyt matematiikka vähintään M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "math"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "tietojarjestelmatiede",
+      "name": "Tietojärjestelmätiede",
+      "table": 3,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "valmennustiede",
+      "name": "Valmennustiede",
+      "table": 3,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "kieli-ru",
+      "name": "Venäjä (vieras kieli)",
+      "table": 7,
+      "threshold": "Pitkä venäjä vähintään C tai lyhyt venäjä vähintään M.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "ru"
+            ],
+            "levels": [
+              "long"
+            ],
+            "min": "C"
+          },
+          {
+            "subjects": [
+              "ru"
+            ],
+            "levels": [
+              "short"
+            ],
+            "min": "M"
+          }
+        ]
+      ],
+      "targetLanguage": "ru"
+    },
+    {
+      "id": "vieraat-kielet-alkeistasolta",
+      "name": "Vieraat kielet alkeistasolta",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "viestintatieteet",
+      "name": "Viestintätieteet",
+      "table": 1,
+      "threshold": "Äidinkieli ja kirjallisuus vähintään C.",
+      "rule": [
+        [
+          {
+            "subjects": [
+              "fi-native",
+              "s2",
+              "sv-native",
+              "r2",
+              "se-native",
+              "smn-native",
+              "sms-native"
+            ],
+            "min": "C"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "viittomakieli",
+      "name": "Viittomakieli",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "yhteiskuntatieteet",
+      "name": "Yhteiskuntatieteet",
+      "table": 1,
+      "threshold": "Ei kynnysehtoa.",
+      "noThreshold": true
+    },
+    {
+      "id": "amk",
+      "name": "Ammattikorkeakoulu (kaikki alat)",
+      "table": 12,
+      "threshold": "AMK-hakukohteilla voi olla omia vähimmäispisteitä ja kynnysehtoja. Tarkista ne hakukohteen tiedoista Opintopolusta."
+    }
+  ]
+}
